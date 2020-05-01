@@ -1,3 +1,9 @@
 1.
 
 2. Make AdminController
+3. Setup templates--> admin
+
+---------------------------------
+
+             5-Home template
+1. Make homeController
