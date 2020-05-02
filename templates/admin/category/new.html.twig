@@ -36,13 +36,9 @@
                 </div>
             </div>
             <div class="card-body">
+                {{ include('admin/category/_form2.html.twig') }}
 
-
-                <h1>Create new Category</h1>
-
-                {{ include('admin/category/_form.html.twig') }}
-
-                <a href="{{ path('category_index') }}">back to list</a>
+                <a href="{{ path('admin_category_index') }}">back to list</a>
 
 
                 <div class="card-footer">

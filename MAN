@@ -27,9 +27,15 @@
     $  php bin/console make:migration
 
     $ php bin/console doctrine:migrations:migrate
+___________________________________
+           8. Category CRUD
 
-7. Make crud Ctagory
+1.. Make crud Category
     $ $ php bin/console make:crud Category
+
+
+__________________________________
+           9. Category manuel form
 
 
 
