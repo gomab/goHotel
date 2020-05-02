@@ -7,3 +7,29 @@
 
              5-Home template
 1. Make homeController
+2. setup home template
+
+----------------------------------
+       7. database
+1.  $ composer require symfony/orm-pack
+
+2. $ composer require --dev symfony/maker-bundle
+
+3. Setup .env file
+
+4. create database
+    $ php bin/console doctrine:database:create
+
+5. Make entity Category
+    $  php bin/console make:entity Category
+
+6. Make migration
+    $  php bin/console make:migration
+
+    $ php bin/console doctrine:migrations:migrate
+
+
+
+---------------
+ composer require symfony/orm-pack
+
