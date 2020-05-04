@@ -96,6 +96,11 @@ class Hotel
      */
     private $updated_at;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $detail;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -289,6 +294,18 @@ class Hotel
     public function setUpdatedAt(?\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getDetail(): ?string
+    {
+        return $this->detail;
+    }
+
+    public function setDetail(?string $detail): self
+    {
+        $this->detail = $detail;
 
         return $this;
     }
