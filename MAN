@@ -56,6 +56,20 @@ ___________________________________
 2. Make migrate
 3. Make CRUD
 
+___________________________________
+            14.Use Login User Auth
+
+1. composer require symfony/security-bu66ndle // Install security Bundle
+2. php bin/console make:user                 // Created User Model
+3. php bin/console make:entity User          // If you wnt add more in user Entity
+5. php bin/console make:migration
+6. php bin/console doctrine:migrations:migrate
+7. php make:auth                            //Create authentification (Choose 1 / AppCustomAuthenticator)
+
+8. php bin/console make:crud User  //Create User database
+9.  php bin/console security:encode-password
+10.  php bin/console make:registration-form
+
 
 
 
