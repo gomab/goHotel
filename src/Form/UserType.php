@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -26,7 +27,7 @@ class UserType extends AbstractType
                     'USER' => 'ROLE_USER'],
             ])
 
-            ->add('Password', PasswordType::class, [
+            ->add('password', PasswordType::class, [
               // instead of being set onto the object directly,
               // this is read and encoded in the controller
               'mapped' => false,
@@ -69,7 +70,20 @@ class UserType extends AbstractType
                     'False' => 'False'],
             ])
         ;
-    }
+
+        //roles field data transformer
+        $builder->get('roles')
+            ->addModelTransformer(new CallbackTransformer(
+                function ($rolesArray) {
+                    // transform the array to a string
+                    return count($rolesArray)? $rolesArray[0]: null;
+                },
+                function ($rolesString) {
+                    // transform the string back to an array
+                    return [$rolesString];
+                }
+            ));
+        }
 
     public function configureOptions(OptionsResolver $resolver)
     {
