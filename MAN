@@ -49,7 +49,12 @@ ____________________________________
 2. Make migrate
 3. Make CRUD
 
+___________________________________
+            13. Admin setting
 
+1. Make entity
+2. Make migrate
+3. Make CRUD
 
 
 

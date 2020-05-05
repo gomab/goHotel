@@ -1,7 +1,7 @@
 {% extends 'homeBase.html.twig' %}
 
-{% block title %}GoHotel{% endblock %}
-{% block keywords %}holiday, vacation{% endblock %}
+{% block title %} {{setting[0].title}} {% endblock %}
+{% block keywords %} {{setting[0].keywords}} {% endblock %}
 {% block description %}GoHotel{% endblock %}
 
  {% block sidebar %} {% include('home/sidebar.html.twig') %} {% endblock %}
