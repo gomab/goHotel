@@ -43,6 +43,18 @@ __________________________________
 
 
 
+____________________________________
+           12. Image Gallery
+1. Make entity
+2. Make migrate
+3. Make CRUD
+
+
+
+
+
+
+
 ---------------
  composer require symfony/orm-pack
 
