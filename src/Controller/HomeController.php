@@ -6,6 +6,7 @@ use App\Entity\Hotel;
 use App\Repository\HotelRepository;
 use App\Repository\ImageRepository;
 use App\Repository\SettingRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -66,6 +67,64 @@ class HomeController extends AbstractController
         return $this->render('home/aboutus.html.twig', [
             'setting'=>$setting,
 
+        ]);
+    }
+
+    /**
+     * @Route("/contact", name="home_contact", methods={"GET","POST"})
+     */
+    public function contact(SettingRepository $settingRepository,Request $request): Response
+    {
+//        $message = new Messages();
+//        $form = $this->createForm(MessagesType::class, $message);
+//        $form->handleRequest($request);
+//        $submittedToken = $request->request->get('token');
+//
+        $setting=$settingRepository->findAll(); // Get setting data
+        // echo $setting[0]->getTitle();
+        // dump($setting);
+        // die();
+//
+//        if ($form->isSubmitted()) {
+//            if ($this->isCsrfTokenValid('form-reservation', $submittedToken)) {
+//                $entityManager = $this->getDoctrine()->getManager();
+//                $message->setStatus('New');
+//                $message->setIp($_SERVER['REMOTE_ADDR']);
+//                $entityManager->persist($message);
+//                $entityManager->flush();
+//                $this->addFlash('success', 'Your message has been sent successfuly');
+//
+//                //********** SEND EMAIL ***********************>>>>>>>>>>>>>>>
+//                $email = (new Email())
+//                    ->from($setting[0]->getSmtpemail())
+//                    ->to($form['email']->getData())
+//                    //->cc('cc@example.com')
+//                    //->bcc('bcc@example.com')
+//                    //->replyTo('fabien@example.com')
+//                    //->priority(Email::PRIORITY_HIGH)
+//                    ->subject('AllHoliday Your Request')
+//                    //->text('Simple Text')
+//                    ->html("Dear ". $form['name']->getData() ."<br>
+//                                 <p>We will evaluate your requests and contact you as soon as possible</p>
+//                                 Thank You for your message<br>
+//                                 =====================================================
+//                                 <br>".$setting[0]->getCompany()."  <br>
+//                                 Address : ".$setting[0]->getAddress()."<br>
+//                                 Phone   : ".$setting[0]->getPhone()."<br>"
+//                    );
+//
+//                $transport = new GmailTransport($setting[0]->getSmtpemail(), $setting[0]->getSmtppassword());
+//                $mailer = new Mailer($transport);
+//                $mailer->send($email);
+//
+//                //<<<<<<<<<<<<<<<<********** SEND EMAIL ***********************
+//                return $this->redirectToRoute('home_contact');
+//            }
+//        }
+
+        return $this->render('home/contact.html.twig', [
+            'setting'=>$setting,
+//            'form' => $form->createView(),
         ]);
     }
 }

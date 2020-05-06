@@ -72,17 +72,17 @@ class Setting
     private $smtpport;
 
     /**
-     * @ORM\Column(type="string", length=20, nullable=true)
+     * @ORM\Column(type="string", length=250, nullable=true)
      */
     private $facebook;
 
     /**
-     * @ORM\Column(type="string", length=20, nullable=true)
+     * @ORM\Column(type="string", length=250, nullable=true)
      */
     private $instagram;
 
     /**
-     * @ORM\Column(type="string", length=20, nullable=true)
+     * @ORM\Column(type="string", length=250, nullable=true)
      */
     private $twitter;
 
