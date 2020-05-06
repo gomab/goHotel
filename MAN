@@ -74,7 +74,10 @@ ___________________________________________
             17  Home page user Panel
 1. templates/user/usermenu.html.twig
 
+__________________________________________
+            18  Home page user Content Manager
 
+1. php
 
 
 
