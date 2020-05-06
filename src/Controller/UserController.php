@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\HotelRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -23,10 +24,47 @@ class UserController extends AbstractController
      */
     public function index(UserRepository $userRepository): Response
     {
-        return $this->render('user/index.html.twig', [
-            'users' => $userRepository->findAll(),
-        ]);
+        return $this->render('user/show.html.twig');
     }
+
+    /**
+     * @Route("/comments", name="user_comments", methods={"GET"})
+     */
+    public function comments(): Response
+    {
+        $user = $this->getUser();
+        //echo $user->getId();
+        //die();
+//        $comments=$commentRepository->getAllCommentsUser($user->getId());
+        //dump($comments);
+        //die();
+        return $this->render('user/comments.html.twig');
+    }
+
+
+    /**
+     * @Route("/hotels", name="user_hotels", methods={"GET"})
+     */
+    public function hotels(): Response
+    {
+//        $user = $this->getUser(); // Get login User data
+
+        return $this->render('user/hotels.html.twig');
+    }
+
+    /**
+     * @Route("/reservations", name="user_reservations", methods={"GET"})
+     */
+    public function reservations(): Response
+    {
+//        $user = $this->getUser(); // Get login User data
+//        // $reservations=$reservationRepository->findBy(['userid'=>$user->getId()]);
+//        $reservations=$reservationRepository->getUserReservation($user->getId());
+//        // dump($reservations);
+//        // die();
+        return $this->render('user/reservations.html.twig');
+    }
+
 
     /**
      * @Route("/new", name="user_new", methods={"GET","POST"})
@@ -105,10 +143,10 @@ class UserController extends AbstractController
     public function edit(Request $request,$id, User $user,UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $user = $this->getUser(); // Get login User data
-//        if ($user->getId() != $id)
-//        {
-//            return $this->redirectToRoute('home');
-//        }
+        if ($user->getId() != $id)
+        {
+            return $this->redirectToRoute('home'); //Make return back for me
+        }
 
 
         $form = $this->createForm(UserType::class, $user);

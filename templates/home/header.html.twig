@@ -67,6 +67,21 @@
                                 <li>
                                     <a href="contact.html"><i class="icon-envelope-alt"></i> Contact</a>
                                 </li>
+
+                                {% if app.user %}
+                                    <li>
+                                        <a href="/user"><img src="{{ asset('uploads/images/' ~ app.user.image) }}" style="height: 30px" >
+                                            {{ app.user.name }}  {{ app.user.surname }}</a>
+
+                                    </li>
+
+                                    <li><a href="/logout">Logout</a></li>
+                                {% else %}
+                                    <li>
+                                        <a href="/loginuser"><i class="icon-envelope-alt"></i> Login</a>
+                                    </li>
+                                {% endif %}
+
                             </ul>
                         </nav>
                     </div>

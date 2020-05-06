@@ -69,6 +69,10 @@ ___________________________________
 8. php bin/console make:crud User  //Create User database
 9.  php bin/console security:encode-password
 10.  php bin/console make:registration-form
+___________________________________________
+
+            17  Home page user Panel
+1. templates/user/usermenu.html.twig
 
 
 
