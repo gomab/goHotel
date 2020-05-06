@@ -7,7 +7,7 @@
                 <div class="container">
                     <!-- logo -->
                     <div class="logo">
-                        <a href="index.html"><img src="{{asset('assets')}}/home/img/logo.png" alt="" /></a>
+                        <a href="/"><img src="{{asset('assets')}}/img/logo.png" alt="" /></a>
                     </div>
                     <!-- end logo -->
 
@@ -19,7 +19,7 @@
                                     <a href="index.html"><i class="icon-home"></i> Home </a>
                                 </li>
                                 <li class="dropdown">
-                                    <a href="#"><i class="icon-cog"></i> Features <i class="icon-angle-down"></i></a>
+                                    <a href="#"><i class="icon-cog"></i> Hotels <i class="icon-angle-down"></i></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="media.html">Media</a></li>
                                         <li><a href="color-scheme.html">10 Theme colors</a></li>
@@ -38,16 +38,11 @@
                                     </ul>
                                 </li>
                                 <li class="dropdown">
-                                    <a href="#"><i class="icon-leaf"></i> Pages <i class="icon-angle-down"></i></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="about.html">About us</a></li>
-                                        <li><a href="pricingbox.html">Pricing boxes</a></li>
-                                        <li><a href="testimonials.html">Testimonials</a></li>
-                                        <li><a href="404.html">404</a></li>
-                                    </ul>
+                                    <a href="/about"><i class="icon-info-sign"></i> About Us <i class="icon-angle-down"></i></a>
+
                                 </li>
                                 <li class="dropdown">
-                                    <a href="#"><i class="icon-briefcase"></i> Portfolio <i class="icon-angle-down"></i></a>
+                                    <a href="#"><i class="icon-briefcase"></i> FAQ <i class="icon-question-sign"></i></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="portfolio-2cols.html">Portfolio 2 columns</a></li>
                                         <li><a href="portfolio-3cols.html">Portfolio 3 columns</a></li>
@@ -65,7 +60,7 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="contact.html"><i class="icon-envelope-alt"></i> Contact</a>
+                                    <a href="/contact"><i class="icon-envelope-alt"></i> Contact</a>
                                 </li>
 
                                 {% if app.user %}
@@ -81,6 +76,8 @@
                                         <a href="/loginuser"><i class="icon-envelope-alt"></i> Login</a>
                                     </li>
                                 {% endif %}
+
+
 
                             </ul>
                         </nav>
