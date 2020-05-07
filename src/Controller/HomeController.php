@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Admin\Messages;
 use App\Entity\Hotel;
+use App\Form\Admin\MessagesType;
 use App\Repository\HotelRepository;
 use App\Repository\ImageRepository;
 use App\Repository\SettingRepository;
@@ -75,25 +77,26 @@ class HomeController extends AbstractController
      */
     public function contact(SettingRepository $settingRepository,Request $request): Response
     {
-//        $message = new Messages();
-//        $form = $this->createForm(MessagesType::class, $message);
-//        $form->handleRequest($request);
-//        $submittedToken = $request->request->get('token');
-//
+        $message = new Messages();
+        $form = $this->createForm(MessagesType::class, $message);
+        $form->handleRequest($request);
+        $submittedToken = $request->request->get('token');
+
         $setting=$settingRepository->findAll(); // Get setting data
         // echo $setting[0]->getTitle();
         // dump($setting);
         // die();
-//
-//        if ($form->isSubmitted()) {
-//            if ($this->isCsrfTokenValid('form-reservation', $submittedToken)) {
-//                $entityManager = $this->getDoctrine()->getManager();
-//                $message->setStatus('New');
-//                $message->setIp($_SERVER['REMOTE_ADDR']);
-//                $entityManager->persist($message);
-//                $entityManager->flush();
-//                $this->addFlash('success', 'Your message has been sent successfuly');
-//
+
+        if ($form->isSubmitted()) {
+            //if ($this->isCsrfTokenValid('form-reservation', $submittedToken)) {
+            if ($this->isCsrfTokenValid('form-message', $submittedToken)) {
+                $entityManager = $this->getDoctrine()->getManager();
+                $message->setStatus('New');
+                $message->setIp($_SERVER['REMOTE_ADDR']);
+                $entityManager->persist($message);
+                $entityManager->flush();
+                $this->addFlash('success', 'Your message has been sent successfuly');
+
 //                //********** SEND EMAIL ***********************>>>>>>>>>>>>>>>
 //                $email = (new Email())
 //                    ->from($setting[0]->getSmtpemail())
@@ -118,13 +121,15 @@ class HomeController extends AbstractController
 //                $mailer->send($email);
 //
 //                //<<<<<<<<<<<<<<<<********** SEND EMAIL ***********************
-//                return $this->redirectToRoute('home_contact');
-//            }
-//        }
+                return $this->redirectToRoute('home_contact');
+            }
+        }
 
         return $this->render('home/contact.html.twig', [
             'setting'=>$setting,
-//            'form' => $form->createView(),
+            'form' => $form->createView(),
         ]);
     }
+
+
 }
