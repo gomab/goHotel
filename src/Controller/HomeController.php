@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Setting;
 use App\Entity\Admin\Messages;
 use App\Entity\Hotel;
 use App\Form\Admin\MessagesType;
@@ -11,7 +12,20 @@ use App\Repository\SettingRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Mailer\Bridge\Google\Transport\GmailSmtpTransport;
+use Symfony\Component\Mailer\Mailer;
+use PhpParser\Node\Expr\BinaryOp\NotEqual;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mailer\Bridge\Google\Smtp\GmailTransport;
+use Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
+
+
+
+//use App\Repository\Admin\CommentRepository;
+//use App\Repository\Admin\RoomRepository;
+
 
 class HomeController extends AbstractController
 {
@@ -97,30 +111,32 @@ class HomeController extends AbstractController
                 $entityManager->flush();
                 $this->addFlash('success', 'Your message has been sent successfuly');
 
-//                //********** SEND EMAIL ***********************>>>>>>>>>>>>>>>
-//                $email = (new Email())
-//                    ->from($setting[0]->getSmtpemail())
-//                    ->to($form['email']->getData())
-//                    //->cc('cc@example.com')
-//                    //->bcc('bcc@example.com')
-//                    //->replyTo('fabien@example.com')
-//                    //->priority(Email::PRIORITY_HIGH)
-//                    ->subject('AllHoliday Your Request')
-//                    //->text('Simple Text')
-//                    ->html("Dear ". $form['name']->getData() ."<br>
-//                                 <p>We will evaluate your requests and contact you as soon as possible</p>
-//                                 Thank You for your message<br>
-//                                 =====================================================
-//                                 <br>".$setting[0]->getCompany()."  <br>
-//                                 Address : ".$setting[0]->getAddress()."<br>
-//                                 Phone   : ".$setting[0]->getPhone()."<br>"
-//                    );
-//
-//                $transport = new GmailTransport($setting[0]->getSmtpemail(), $setting[0]->getSmtppassword());
-//                $mailer = new Mailer($transport);
-//                $mailer->send($email);
-//
-//                //<<<<<<<<<<<<<<<<********** SEND EMAIL ***********************
+                //********** SEND EMAIL ***********************>>>>>>>>>>>>>>>
+                $email = (new Email())
+                    ->from($setting[0]->getSmtpemail())  //Admin mail setting
+                    ->to($form['email']->getData())      // mail from contact form
+                    //->cc('cc@example.com')
+                    //->bcc('bcc@example.com')
+                    //->replyTo('fabien@example.com')
+                    //->priority(Email::PRIORITY_HIGH)
+                    ->subject('Thellema')
+                    //->text('Simple Text')
+                    ->html("Dear ". $form['name']->getData() ."<br>
+                                 <p>We will evaluate your requests and contact you as soon as possible</p>
+                                 Thank You for your message<br>
+                                 =====================================================
+                                 <br>".$setting[0]->getCompany()."  <br>
+                                 Address : ".$setting[0]->getAddress()."<br>
+                                 Phone   : ".$setting[0]->getPhone()."<br>"
+                    );
+
+              //  $transport = new GmailTransport($setting[0]->getSmtpemail(), $setting[0]->getSmtppassword());
+                $transport = new GmailSmtpTransport($setting[0]->getSmtpemail(), $setting[0]->getSmtppassword());
+
+                $mailer = new Mailer($transport);
+                $mailer->send($email);
+
+                //<<<<<<<<<<<<<<<<********** SEND EMAIL ***********************
                 return $this->redirectToRoute('home_contact');
             }
         }

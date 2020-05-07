@@ -39,6 +39,29 @@ class Setting
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
+    private $address;
+
+    /**
+     * @return mixed
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param mixed $address
+     * @return Setting
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+        return $this;
+    }
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
     private $phone;
 
     /**

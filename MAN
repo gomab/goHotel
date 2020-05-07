@@ -89,6 +89,14 @@ __________________________________________
 5. php bin/console make:crud "Admin\Messages"
 
 
+______________________________________________
+            23 Send mail with gmail
+
+1. composer require symfony/mailer
+2. composer require symfony/google-mailer
+
+
+
 
 ---------------
  composer require symfony/orm-pack

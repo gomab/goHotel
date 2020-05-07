@@ -18,6 +18,7 @@ class SettingType extends AbstractType
             ->add('keywords')
             ->add('description')
             ->add('company')
+            ->add('address')
             ->add('phone')
             ->add('fax')
             ->add('email')
