@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\File;
 
 /**
  * @Route("/user/image")
@@ -116,17 +117,33 @@ class ImageController extends AbstractController
         ]);
     }
 
+//    /**
+//     * @Route("/{id}", name="user_image_delete", methods={"DELETE"})
+//     */
+//    public function delete(Request $request, Image $image): Response
+//    {
+//        if ($this->isCsrfTokenValid('delete'.$image->getId(), $request->request->get('_token'))) {
+//            $entityManager = $this->getDoctrine()->getManager();
+//            $entityManager->remove($image);
+//            $entityManager->flush();
+//        }
+//
+//        return $this->redirectToRoute('user_image_index');
+//    }
+
+
     /**
-     * @Route("/{id}", name="user_image_delete", methods={"DELETE"})
+     * @Route("/{id}/{hid}", name="user_image_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Image $image): Response
+    public function delete(Request $request, $hid, Image $image): Response
     {
+        //hid = hotel id
         if ($this->isCsrfTokenValid('delete'.$image->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($image);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('user_image_index');
+        return $this->redirectToRoute('user_image_new', ['id'=> $hid]);
     }
 }
