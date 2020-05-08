@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Admin\Comment;
 use App\Entity\User;
+use App\Form\Admin\CommentType;
 use App\Form\UserType;
 use App\Repository\HotelRepository;
 use App\Repository\UserRepository;
@@ -213,5 +215,37 @@ class UserController extends AbstractController
         }
 
         return $this->redirectToRoute('user_index');
+    }
+
+    /**
+     * @Route("/newcomment/{id}", name="user_new_comment", methods={"GET","POST"})
+     */
+    public function newcomment(Request $request,$id): Response
+    {
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        $submittedToken = $request->request->get('token');
+
+        if ($form->isSubmitted()) {
+            if ($this->isCsrfTokenValid('comment', $submittedToken)) {
+                $entityManager = $this->getDoctrine()->getManager();
+
+                $comment->setStatus('New');
+                $comment->setIp($_SERVER['REMOTE_ADDR']);
+                $comment->setHotelid($id);
+                $user = $this->getUser();
+                $comment->setUserid($user->getId());
+
+                $entityManager->persist($comment);
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Your comment has been sent successfuly');
+                return $this->redirectToRoute('hotel_show', ['id' => $id]);
+            }
+        }
+
+        return $this->redirectToRoute('hotel_show', ['id'=> $id]);
     }
 }

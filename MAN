@@ -95,6 +95,15 @@ ______________________________________________
 1. composer require symfony/mailer
 2. composer require symfony/google-mailer
 
+_____________________________________________
+             28 User comments and rates
+
+1.php bin/console make:entity Comment
+2.
+3.
+4.  php bin/console make:crud "Admin\Comment"
+
+
 
 
 

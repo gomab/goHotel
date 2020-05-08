@@ -6,6 +6,7 @@ use App\Entity\Setting;
 use App\Entity\Admin\Messages;
 use App\Entity\Hotel;
 use App\Form\Admin\MessagesType;
+use App\Repository\CommentRepository;
 use App\Repository\HotelRepository;
 use App\Repository\ImageRepository;
 use App\Repository\SettingRepository;
@@ -58,17 +59,17 @@ class HomeController extends AbstractController
     /**
      * @Route("/hotel/{id}", name="hotel_show", methods={"GET"})
      */
-    public function show(Hotel $hotel,$id,ImageRepository $imageRepository): Response
+    public function show(Hotel $hotel,$id,ImageRepository $imageRepository, CommentRepository $commentRepository): Response
     {
         $images=$imageRepository->findBy(['hotel'=>$id]);
-//        $comments=$commentRepository->findBy(['hotelid'=>$id, 'status'=>'True']);
+        $comments=$commentRepository->findBy(['hotelid'=>$id, 'status'=>'True']);
 //        $rooms =$roomRepository->findBy(['hotelid'=>$id, 'status'=>'True']);
 
         return $this->render('home/hotelshow.html.twig', [
             'hotel' => $hotel,
             'images' => $images,
 //            'rooms' => $rooms,
-//            'comments' => $comments,
+            'comments' => $comments,
         ]);
     }
 
