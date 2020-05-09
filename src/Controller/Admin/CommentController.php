@@ -4,7 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Admin\Comment;
 use App\Form\Admin\CommentType;
-use App\Repository\CommentRepository;
+use App\Repository\Admin\CommentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
