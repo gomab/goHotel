@@ -21,8 +21,10 @@ class HotelController extends AbstractController
      */
     public function index(HotelRepository $hotelRepository): Response
     {
+        $hotels=$hotelRepository->getAllHotels();
         return $this->render('admin/hotel/index.html.twig', [
-            'hotels' => $hotelRepository->findAll(),
+            'hotels' => $hotels,
+//            'hotels' => $hotelRepository->findAll(),
         ]);
     }
 
@@ -140,6 +142,6 @@ class HotelController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('admin/hotel_index');
+        return $this->redirectToRoute('admin_hotel_index');
     }
 }

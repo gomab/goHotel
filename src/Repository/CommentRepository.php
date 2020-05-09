@@ -47,4 +47,40 @@ class CommentRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    // *** lEFT JOIN WITH SQL ******************
+    /**
+     * Voir les comentaires liés à un hotel
+     * @return array
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function getAllComments(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = '
+        SELECT c.*,u.name,u.surname,h.title FROM comment c
+        JOIN user u ON u.id = c.userid
+        JOIN hotel h ON h.id = c.hotelid
+        ORDER BY c.id DESC
+        ';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $stmt->fetchAll();
+    }
+
+    // *** lEFT JOIN WITH DOCTRINE ******************
+    public function getAllCommentsUser($userid): array
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->select('c.id,c.subject,c.comment,c.rate,c.created_at,c.status,c.hotelid,h.title')
+            ->leftJoin('App\Entity\Hotel', 'h', 'WITH','h.id = c.hotelid')
+            ->where('c.userid = :userid')
+            ->setParameter('userid', $userid)
+            ->orderBy('c.id', 'DESC');
+        $query = $qb->getQuery();
+        return $query->execute();
+    }
+
 }

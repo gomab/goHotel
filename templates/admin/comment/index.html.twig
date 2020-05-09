@@ -63,12 +63,9 @@
                                 <td>{{ comment.comment }}</td>
                                 <td>{{ comment.status }}</td>
                                 <td>{{ comment.ip }}</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-{#                                <td><a href="{{ path('admin_user_show', {'id': comment.id}) }}">{{ comment.name }} {{ comment.surname }}</a>   </td>#}
-{#                                <td><a href="{{ path('admin_hotel_show', {'id': comment.id}) }}">{{ comment.title }}</a></td>#}
-{#                                <td>{{ comment.created_at }}</td>#}
+                                <td><a href="{{ path('admin_user_show', {'id': comment.id}) }}">{{ comment.name }} {{ comment.surname }}</a>   </td>
+                                <td><a href="{{ path('admin_hotel_show', {'id': comment.id}) }}">{{ comment.title }}</a></td>
+                                <td>{{ comment.created_at }}</td>
                                 <td>{{ comment.rate }}</td>
                                 <td>
                                     <a class="btn btn-success" href="{{ path('admin_comment_show', {'id': comment.id}) }}">Show</a>

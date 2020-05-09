@@ -6,6 +6,7 @@ use App\Entity\Admin\Comment;
 use App\Entity\User;
 use App\Form\Admin\CommentType;
 use App\Form\UserType;
+use App\Repository\CommentRepository;
 use App\Repository\HotelRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,20 +30,23 @@ class UserController extends AbstractController
         return $this->render('user/show.html.twig');
     }
 
+
     /**
      * @Route("/comments", name="user_comments", methods={"GET"})
      */
-    public function comments(): Response
+    public function comments(CommentRepository $commentRepository): Response
     {
         $user = $this->getUser();
         //echo $user->getId();
         //die();
-//        $comments=$commentRepository->getAllCommentsUser($user->getId());
+        /** @var TYPE_NAME $user */
+        $comments=$commentRepository->getAllCommentsUser($user->getId());
         //dump($comments);
         //die();
-        return $this->render('user/comments.html.twig');
+        return $this->render('user/comments.html.twig',[
+            'comments'=>$comments,
+        ]);
     }
-
 
     /**
      * @Route("/hotels", name="user_hotels", methods={"GET"})

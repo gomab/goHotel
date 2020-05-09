@@ -47,4 +47,21 @@ class HotelRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    // *** lEFT JOIN WITH SQL ******************
+    public function getAllHotels(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = '
+            SELECT h.*,c.title as catname,u.name,u.surname FROM hotel h
+            JOIN category c ON c.id = h.category_id
+            JOIN user u ON u.id = h.userid
+            ORDER BY c.title ASC
+        ';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $stmt->fetchAll();
+    }
 }
